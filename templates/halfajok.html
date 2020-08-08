@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Halfajok</title>
+    <link rel="stylesheet" href="../static/css/halak.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<ul class="menubar">
+    <li class="item"><a href="index">Kezdőlap</a></li>
+    <li class="item"><a href="horgaszatok">Horgászatok</a></li>
+    <li class="item"><a href="tavak">Tavak</a></li>
+    <li class="item"><a class="active" href="halfajok">Halak</a></li>
+</ul>
+<section class="content">
+    <h1>KIFOGOTT HALAK</h1>
+    <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>
+                    <form action="{{ url_for('sortfishbyname') }}" method="post" class="w3-container">
+                        <input class="sortbutton" type="submit" value="HALFAJ">
+                    </form>
+                </th>
+                <th>
+                    <form action="{{ url_for('sortfishbysize') }}" method="post" class="w3-container">
+                        <input class="sortbutton" type="submit" value="MÉRET(KG)">
+                    </form>
+                </th>
+                <th>
+                    <form action="{{ url_for('sortfishbydate') }}" method="post" class="w3-container">
+                        <input class="sortbutton" type="submit" value="DÁTUM">
+                    </form>
+                </th>
+                <th>
+                    <form action="{{ url_for('sortfishbytime') }}" method="post" class="w3-container">
+                        <input class="sortbutton" type="submit" value="FOGÁSI IDŐ">
+                    </form>
+                </th>
+                <th>
+                    <form action="{{ url_for('sortfishbybait') }}" method="post" class="w3-container">
+                        <input class="sortbutton" type="submit" value="CSALI">
+                    </form>
+                </th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0">
+            {% for fish in fishlist %}
+                <tr>
+                    <td name="no"> {{ loop.index }}</td>
+                    <td name="nev">{{ fish.name }}</td>
+                    <td>{{ fish.size }}</td>
+                    <td> {{ fish.date }} </td>
+                    <td>{{ fish.time }}</td>
+                    <td>{{ fish.bait }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tavak</title>
+    <link rel="stylesheet" href="../static/css/tavak.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+<ul class="menubar">
+    <li class="item"><a href="index">Kezdőlap</a></li>
+    <li class="item"><a href="horgaszatok">Horgászatok</a></li>
+    <li class="item"><a class="active" href="tavak">Tavak</a></li>
+    <li class="item"><a href="halfajok">Halak</a></li>
+</ul>
+
+
+<section class="content">
+    <h1>HORGÁSZ TAVAK</h1>
+    <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>
+                    <form action="{{ url_for('sortlakebyname') }}" method="post" class="w3-container">
+                        <input class="sortbutton" type="submit" value="NÉV">
+                    </form>
+                </th>
+                <th>
+                    <form action="{{ url_for('sortlakebylocation') }}" method="post" class="w3-container">
+                        <input class="sortbutton" type="submit" value="HELYSZÍN">
+                    </form>
+                </th>
+                <th>
+                    <form action="{{ url_for('sortlakebyprice') }}" method="post" class="w3-container">
+                        <input class="sortbutton" type="submit" value="ÁR">
+                    </form>
+                </th>
+                <th>
+                    <form action="{{ url_for('sortlakebyfish') }}" method="post" class="w3-container">
+                        <input class="sortbutton" type="submit" value="ELVIHTŐ HAL">
+                    </form>
+                </th>
+                <th>
+                    Adatlap
+                </th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0">
+            {% for to in tavak %}
+                <tr>
+                    <td name="no"> {{ loop.index }}</td>
+                    <td name="nev">{{ to.name }}</td>
+                    <td>{{ to.location }}</td>
+                    <td>{{ to.price }}</td>
+                    <td>{{ to.fish }}</td>
+                    <td>
+                        <form action="{{ url_for('lakedatapage', name=to.name) }}" method="post" class="w3-container">
+                            <input class="sortbutton" type="submit" value="Részletek">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+<h2 id="header" class="error"
+    style="color: red; font-family: sans-serif;font-size: 20pt; text-align: center;">{{ error }}</h2>
+<h1 id="msg" class="msg">{{ msg }}</h1>
+<button id="myBtn" class="dialogbutton">Új tó!</button>
+
+<img src="../static/images/cicu.gif"
+     style=" display: block; margin: auto; margin-top: 50px !important;"/>
+
+
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content" style="background: #333344;">
+        <span class="close">&times;</span>
+        <div class="w3-container">
+            <h2 style="margin: auto; font-size: 40px; color: whitesmoke;">Új tó felvétele!</h2>
+        </div>
+        <form action="{{ url_for('addnewlake') }}" method="post" class="w3-container">
+            <p>
+                <input class="w3-input" type="text" name="name">
+                <label>Név</label></p>
+            <p>
+                <input class="w3-input" type="text" name="location">
+                <label>Helyszín</label></p>
+            <p>
+                <input class='w3-input' placeholder="UAH" type="number" name="price">
+                <label>Ár</label></p>
+            <p>
+                <input class="w3-input" type="text" name="fish">
+                <label>Elhozható halak</label></p>
+            <input type="submit" name="Mentés" value="Mentés" class="dialogbutton">
+        </form>
+    </div>
+
+</div>
+
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>

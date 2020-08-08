@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Főoldal</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+<body>
+
+<ul class="menubar">
+    <li class="item"><a class="active" href="index">Kezdőlap</a></li>
+    <li class="item"><a href="horgaszatok">Horgászatok</a></li>
+    <li class="item"><a href="tavak">Tavak</a></li>
+    <li class="item"><a href="halfajok">Halak</a></li>
+    <div class="closeappbutton" style=" height: 50px; display:inline-block; float: right;">
+        <form action="{{ url_for('shutdown') }}" method="post">
+            <input class="close_app"
+                   style="  margin:auto;
+                            display: inline-block;
+                            width: 180px;
+                            height: 50px;
+                            border: 3px solid white;
+                            background-color: rgba(255, 255, 255, 0);
+                            color: white;
+                            font-family: sans-serif;
+                            font-weight: bold;
+                            border-radius: 5px;
+                            transition: background-color 1000ms, color 1000ms;"
+                   type="submit" value="Az alkalmazás leállítása!">
+        </form>
+    </div>
+</ul>
+
+
+<img src="../static/images/logo.png" alt="logo" width="800" height="600"
+     style=" display: block; margin: auto; margin-top: 50px !important;">
+
+
+</body>
+
+</html>
